@@ -18,11 +18,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\RootTabbedPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Settings\SettingsHomePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Settings\SettingsNavigationPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Run.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Settings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\History\" />
     <Folder Include="$(MSBuildThisFileDirectory)Views\Home\" />
+    <Folder Include="$(MSBuildThisFileDirectory)DataAccess\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
   </ItemGroup>
 </Project>
