@@ -139,4 +139,11 @@
       <Visible>False</Visible>
     </XamarinComponentReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="..\..\SimpleRun\" />
+    <Folder Include="..\..\SimpleRun\Views\" />
+    <Folder Include="..\..\SimpleRun\Views\" />
+    <Folder Include="..\..\SimpleRun\" />
+    <Folder Include="..\..\SimpleRun\Views\" />
+  </ItemGroup>
 </Project>

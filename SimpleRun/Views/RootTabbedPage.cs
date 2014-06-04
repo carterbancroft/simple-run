@@ -9,13 +9,13 @@ namespace SimpleRun.Views
 {
 	public class RootTabbedPage : TabbedPage
 	{
-		RunPage runPage;
+		HomePage runPage;
 		HistoryNavigationPage historyPage;
 		SettingsNavigationPage settingsPage;
 
 		public RootTabbedPage()
 		{
-			runPage = new RunPage();
+			runPage = new HomePage();
 			historyPage = new HistoryNavigationPage();
 			settingsPage = new SettingsNavigationPage();
 

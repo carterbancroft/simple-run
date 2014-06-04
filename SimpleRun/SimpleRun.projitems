@@ -12,13 +12,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoLocationTracker.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\TestPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Home\RunPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\History\HistoryHomePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\History\HistoryNavigationPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\RootTabbedPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Settings\SettingsHomePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Settings\SettingsNavigationPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Run.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataAccess\Database.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Home\HomePage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\History\RunPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />

@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using SimpleRun.Views;
+using SimpleRun.Models;
+using SimpleRun.DataAccess;
 
 namespace SimpleRun
 {
@@ -32,6 +36,19 @@ namespace SimpleRun
 		}
 
 		public static bool UserIsRunning { get; set; }
+
+		public static void SaveRun(Run newRun) {
+			lock (Database.Main) {
+				Database.Main.Insert(newRun);
+			}
+		}
+
+		public static List<Run> GetRuns() {
+			var runs = new List<Run>();
+			lock (Database.Main) {
+				runs = Database.Main.Table<Run>().ToList();
+			}
+			return runs;
+		}
 	}
 }
-

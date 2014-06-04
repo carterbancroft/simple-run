@@ -2,6 +2,9 @@
 using System.Linq;
 using System.Collections.Generic;
 using Xamarin.Geolocation;
+using SimpleRun.Models;
+
+
 #if __IOS__
 using MonoTouch.CoreLocation;
 #endif
@@ -90,15 +93,15 @@ namespace SimpleRun
 				if (bestPosition == null) bestPosition = e.Position;
 
 				if (canUpdateStats) {
-					#if __IOS__
+#if __IOS__
 					var bestLocation = new CLLocation(bestPosition.Latitude, bestPosition.Longitude);
-					#endif
+#endif
 
 					if (previousPosition != null) {
-						#if __IOS__
+#if __IOS__
 						var prevLocation = new CLLocation(previousPosition.Latitude, previousPosition.Longitude);
 						var test = bestLocation.DistanceFrom(prevLocation);
-						#endif
+#endif
 						CurrentDistance += DistanceInMeters(bestPosition, previousPosition);
 
 						totalAveragePaceHistory.Add(bestPosition.Speed);
@@ -120,6 +123,18 @@ namespace SimpleRun
 		public void StopTrackingLocation()
 		{
 			geolocator.StopListening();
+
+			TimeSpan totalRunTime = DateTimeOffset.Now - startTime;
+
+			var newRun = new Run {
+				RunDate = DateTime.Now,
+				DistanceInMeters = CurrentDistance,
+				AveragePaceInMetersPerSecond = AveragePace,
+				DurationInSeconds = totalRunTime.Seconds,
+			};
+
+			App.SaveRun(newRun);
+
 			Init();
 		}
 

@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace SimpleRun.Views.Home
 {
-	public class RunPage : ContentPage
+	public class HomePage : ContentPage
 	{
 		Button runButton;
 		Label distanceLabel;
@@ -15,7 +15,7 @@ namespace SimpleRun.Views.Home
 		DateTimeOffset startTime;
 		GeoLocationTracker tracker;
 
-		public RunPage()
+		public HomePage()
 		{
 			tracker = new GeoLocationTracker();
 
@@ -42,7 +42,7 @@ namespace SimpleRun.Views.Home
 
 			runButton = new Button {
 				TextColor = Color.White,
-				Font = Font.SystemFontOfSize(40),
+				Font = Font.SystemFontOfSize(55),
 			};
 
 			var distanceTimer = Observable.Interval(TimeSpan.FromSeconds(2)).DistinctUntilChanged();
@@ -73,7 +73,7 @@ namespace SimpleRun.Views.Home
 				Children = {
 					new StackLayout {
 						VerticalOptions = LayoutOptions.Start,
-						Padding = new Thickness(0, 20, 0, 0),
+						Padding = new Thickness(0, 70, 0, 0),
 						Children = {
 							runButton
 						}
