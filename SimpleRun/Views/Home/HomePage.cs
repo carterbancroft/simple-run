@@ -21,6 +21,8 @@ namespace SimpleRun.Views.Home
 		IDisposable distanceAndSpeedSubscription;
 		IDisposable durationSubscription;
 
+		const int runButtonOffset = 125;
+
 		public HomePage()
 		{
 			tracker = new GeoLocationTracker();
@@ -90,7 +92,7 @@ namespace SimpleRun.Views.Home
 				}),
 				Constraint.RelativeToParent(parent => {
 					if (App.UserIsRunning)
-						return (parent.Width / 2) - 125;
+						return (parent.Width / 2) - runButtonOffset;
 					
 					return parent.Width / 2;
 				}),
@@ -166,18 +168,18 @@ namespace SimpleRun.Views.Home
 		{
 			App.UserIsRunning = true;
 
-			await runButton.LayoutTo(new Rectangle(runButton.X, runButton.Y - 125, runButton.Width, runButton.Height), 150, Easing.SpringOut);
+			await runButton.LayoutTo(new Rectangle(runButton.X, runButton.Y - runButtonOffset, runButton.Width, runButton.Height), 150, Easing.SpringOut);
 		
 			var distanceTimer = Observable.Interval(TimeSpan.FromSeconds(2)).DistinctUntilChanged();
 			var durationTimer = Observable.Interval(TimeSpan.FromSeconds(1)).DistinctUntilChanged();
-
-			tracker.BeginTrackingLocation();
 
 			runButton.Text = "Stop";
 			BackgroundColor = App.RunTint;
 			distanceLabel.Opacity = 1;
 			paceLabel.Opacity = 1;
 			durationLabel.Opacity = 1;
+
+			tracker.BeginTrackingLocation();
 
 			startTime = DateTimeOffset.Now;
 			distanceAndSpeedSubscription = distanceTimer.ObserveOn(SynchronizationContext.Current).Subscribe(DistanceAndSpeedTimerTick);
@@ -192,7 +194,7 @@ namespace SimpleRun.Views.Home
 			distanceAndSpeedSubscription.Dispose();
 			durationSubscription.Dispose();
 
-			await runButton.LayoutTo(new Rectangle(runButton.X, runButton.Y + 125, runButton.Width, runButton.Height), 150, Easing.SpringOut);
+			await runButton.LayoutTo(new Rectangle(runButton.X, runButton.Y + runButtonOffset, runButton.Width, runButton.Height), 150, Easing.SpringOut);
 			App.UserIsRunning = false;
 			BackgroundColor = App.StationaryTint;
 			runButton.Text = "Run";

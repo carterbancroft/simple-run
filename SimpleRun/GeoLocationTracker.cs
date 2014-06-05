@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using Xamarin.Geolocation;
 using SimpleRun.Models;
 
-
 #if __IOS__
 using MonoTouch.CoreLocation;
 #endif
@@ -130,7 +129,7 @@ namespace SimpleRun
 				RunDate = DateTime.Now,
 				DistanceInMeters = CurrentDistance,
 				AveragePaceInMetersPerSecond = AveragePace,
-				DurationInSeconds = totalRunTime.Seconds,
+				DurationInSeconds = Convert.ToInt32(Math.Round(totalRunTime.TotalSeconds, 0)),
 			};
 
 			App.SaveRun(newRun);
