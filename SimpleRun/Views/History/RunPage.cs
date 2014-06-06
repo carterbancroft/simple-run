@@ -1,5 +1,6 @@
 ﻿using System;
 using Xamarin.Forms;
+using Xamarin.Forms.Maps;
 using SimpleRun.Models;
 
 namespace SimpleRun
@@ -11,6 +12,9 @@ namespace SimpleRun
 		Label distanceLabel;
 		Label averagePaceLabel;
 		Label durationLabel;
+		Map map;
+
+		public string Name { get; private set; }
 
 		public RunPage(Run _run)
 		{
@@ -35,14 +39,29 @@ namespace SimpleRun
 				Font = font,
 			};
 
+			map = new Map();
+
+			Position position = new Position(37.79762, -122.40181);
+			map.MoveToRegion(new MapSpan(position, 0.01, 0.01));
+			map.Pins.Add(new Pin {
+				Label = "Xamarin",
+				Position = position
+			});
+
 			Content = new StackLayout {
 				Orientation = StackOrientation.Vertical,
-				VerticalOptions = LayoutOptions.Start,
-				Padding = new Thickness(20),
+				VerticalOptions = LayoutOptions.FillAndExpand,
 				Children = {
-					durationLabel,
-					distanceLabel,
-					averagePaceLabel,
+					new StackLayout {
+						VerticalOptions = LayoutOptions.Start,
+						Padding = new Thickness(10),
+						Children = {
+							durationLabel,
+							distanceLabel,
+							averagePaceLabel,
+						}
+					},
+					map,
 				}
 			};
 		}

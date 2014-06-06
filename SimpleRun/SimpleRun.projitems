@@ -21,6 +21,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataAccess\Database.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Home\HomePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\History\RunPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\RunPosition.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extensions\RunExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />
@@ -29,5 +31,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Views\Home\" />
     <Folder Include="$(MSBuildThisFileDirectory)DataAccess\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
   </ItemGroup>
 </Project>

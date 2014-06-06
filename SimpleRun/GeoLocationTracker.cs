@@ -3,10 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Xamarin.Geolocation;
 using SimpleRun.Models;
-
-#if __IOS__
-using MonoTouch.CoreLocation;
-#endif
+using SimpleRun.Extensions;
 
 namespace SimpleRun
 {
@@ -16,17 +13,18 @@ namespace SimpleRun
 		const int minPositionsNeededToUpdateStats = 3;
 		const double maxHorizontalAccuracy = 40.0f;
 
+		Geolocator geolocator;
+
 		TimeSpan statsCalculationInterval;
 		TimeSpan validLocationHistoryDeltaInterval;
 
 		DateTimeOffset previousDistanceTime;
 		DateTimeOffset startTime;
 
-		Geolocator geolocator;
-
 		Position previousPosition;
 		List<Position> positionHistory;
 		List<Position> routePositions;
+		List<RunPosition> totalPositionHistory;
 		List<double> totalAveragePaceHistory;
 
 		public double CurrentDistance { get; set; }
@@ -46,6 +44,7 @@ namespace SimpleRun
 			CurrentPace = 0;
 			positionHistory = new List<Position>();
 			routePositions = new List<Position>();
+			totalPositionHistory = new List<RunPosition>();
 			totalAveragePaceHistory = new List<double>();
 			previousPosition = null;
 			statsCalculationInterval = new TimeSpan(0, 0, 1);
@@ -92,15 +91,7 @@ namespace SimpleRun
 				if (bestPosition == null) bestPosition = e.Position;
 
 				if (canUpdateStats) {
-#if __IOS__
-					var bestLocation = new CLLocation(bestPosition.Latitude, bestPosition.Longitude);
-#endif
-
 					if (previousPosition != null) {
-#if __IOS__
-						var prevLocation = new CLLocation(previousPosition.Latitude, previousPosition.Longitude);
-						var test = bestLocation.DistanceFrom(prevLocation);
-#endif
 						CurrentDistance += DistanceInMeters(bestPosition, previousPosition);
 
 						totalAveragePaceHistory.Add(bestPosition.Speed);
@@ -109,6 +100,17 @@ namespace SimpleRun
 				}
 
 				routePositions.Add(bestPosition);
+
+				// Only insert every fifth point to minimize the amount of data being stored.
+				if (totalPositionHistory.Count == 0 || totalPositionHistory.Count % 5 == 0) {
+					totalPositionHistory.Add(new RunPosition {
+						Speed = bestPosition.Speed,
+						Latitude = bestPosition.Latitude,
+						Longitude = bestPosition.Longitude,
+						PositionCaptureTime = bestPosition.Timestamp.DateTime
+					});
+				}
+
 				previousPosition = bestPosition;
 			};
 
@@ -132,7 +134,7 @@ namespace SimpleRun
 				DurationInSeconds = Convert.ToInt32(Math.Round(totalRunTime.TotalSeconds, 0)),
 			};
 
-			App.SaveRun(newRun);
+			newRun.Create(totalPositionHistory);
 
 			Init();
 		}

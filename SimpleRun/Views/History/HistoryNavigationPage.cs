@@ -10,7 +10,7 @@ namespace SimpleRun.Views.History
 	{
 		public HistoryNavigationPage() : base(new HistoryHomePage())
 		{
-			Tint = App.StationaryTint;
+			Tint = App.HeaderTint;
 			Icon = "book@2x.png";
 			Title = "History";
 		}

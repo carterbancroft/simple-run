@@ -1,7 +1,14 @@
 ﻿using System;
 using System.IO;
-using SQLite;
+using SQLite.Net;
 using SimpleRun.Models;
+
+#if __Android__
+using SQLite.Net.Platform.XamarinAndroid;
+#else
+using SQLite.Net.Platform.XamarinIOS;
+#endif
+
 
 namespace SimpleRun.DataAccess
 {
@@ -19,11 +26,20 @@ namespace SimpleRun.DataAccess
 		{
 			Main = new Database(DBPath);
 		}
-
-		protected Database(string path) : base(path)
+			
+#if __Android__
+		protected Database(string path) : base(new SQLitePlatformAndroid(), path)
 		{
 			CreateTable<Run>();
+			CreateTable<RunPosition>();
 		}
+#else
+		protected Database(string path) : base(new SQLitePlatformIOS(), path)
+		{
+			CreateTable<Run>();
+			CreateTable<RunPosition>();
+		}
+#endif
 	}
 }
 

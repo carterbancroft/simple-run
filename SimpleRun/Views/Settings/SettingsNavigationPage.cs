@@ -10,7 +10,7 @@ namespace SimpleRun.Views.Settings
 	{
 		public SettingsNavigationPage() : base(new SettingsHomePage())
 		{
-			Tint = App.StationaryTint;
+			Tint = App.HeaderTint;
 			Icon = "settings@2x.png";
 			Title = "Settings";
 		}

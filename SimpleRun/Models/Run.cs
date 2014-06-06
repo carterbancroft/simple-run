@@ -1,5 +1,10 @@
 ﻿using System;
-using SQLite;
+using System.Linq;
+using System.Collections.Generic;
+using Xamarin.Geolocation;
+using SQLite.Net.Attributes;
+using SQLiteNetExtensions.Attributes;
+using SimpleRun.DataAccess;
 
 namespace SimpleRun.Models
 {
@@ -7,15 +12,21 @@ namespace SimpleRun.Models
 	{
 		[PrimaryKey, AutoIncrement]
 		public int ID { get; set; }
-		public DateTime RunDate { get; set; }
+		public int DurationInSeconds { get; set; }
 		public double DistanceInMeters { get; set; }
 		public double AveragePaceInMetersPerSecond { get; set; }
-		public int DurationInSeconds { get; set; }
+		public DateTime RunDate { get; set; }
+
+		[OneToMany]
+		public List<RunPosition> RunPositions { get; set; }
 
 		[Ignore]
 		public string FriendlyDuration {
 			get {
 				var timeSpan = new TimeSpan(0, 0, DurationInSeconds);
+				if (timeSpan.Hours == 0)
+					return timeSpan.ToString(@"hh\:mm\:ss");
+
 				return timeSpan.ToString(@"hh\:mm\:ss");
 			}
 		}
@@ -36,6 +47,25 @@ namespace SimpleRun.Models
 				var minutesPerKm = Math.Round(1 / (AveragePaceInMetersPerSecond * 0.001 * 60.0), 2);
 				var timeSpan = TimeSpan.FromMinutes(minutesPerKm);
 				return timeSpan.ToString(@"mm\:ss");
+			}
+		}
+
+		public static List<Run> All() {
+			var runs = new List<Run>();
+			lock (Database.Main) {
+				runs = Database.Main.Table<Run>().ToList();
+			}
+			return runs;
+		}
+
+		[Ignore]
+		public List<RunPosition> Positions {
+			get {
+				var positions = new List<RunPosition>();
+				lock (Database.Main) {
+					positions = Database.Main.Table<RunPosition>().Where(r => r.RunID == ID).ToList();
+				}
+				return positions;
 			}
 		}
 	}

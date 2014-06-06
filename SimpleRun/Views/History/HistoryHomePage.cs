@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using SimpleRun.Models;
 
 namespace SimpleRun.Views.History
 {
 	public class HistoryHomePage : ContentPage
 	{
-		ListView listView;
+		TableView tableView;
 
 		public HistoryHomePage()
 		{
@@ -21,25 +23,31 @@ namespace SimpleRun.Views.History
 			cellTemplate.SetBinding (TextCell.TextProperty, new Binding("Title"));
 
 			var runPages = new List<RunPage>();
-			foreach (var run in App.GetRuns()) {
+			foreach (var run in Run.All()) {
 				runPages.Add(new RunPage(run));
 			}
 
-			listView = new ListView {
-				RowHeight = 40,
-				//IsGroupingEnabled = true,
-				ItemTemplate = cellTemplate,
-				ItemsSource = runPages,
+			tableView = new TableView {
+				Intent = TableIntent.Form,
 			};
 
-			listView.ItemSelected += (sender, arg) => {
-				if (listView.SelectedItem != null) {
-					Navigation.PushAsync((ContentPage)listView.SelectedItem);
-					listView.SelectedItem = null;
+			var root = new TableRoot();
+			var groupedRunsByDate = Run.All().OrderByDescending(r => r.RunDate).GroupBy(r => r.RunDate.Date).ToDictionary(r => r.Key, r => r.ToList());
+
+			foreach (var key in groupedRunsByDate.Keys) {
+				var newSection = new TableSection(key.ToShortDateString());
+				foreach (var run in groupedRunsByDate[key]) {
+					newSection.Add(new TextCell {
+						Text = string.Format("{0} km", run.DistanceInKm),
+						Detail = run.FriendlyDuration,
+						Command = new Command(async () => await Navigation.PushAsync(new RunPage(run))),
+					});
 				}
-			};
+				root.Add(newSection);
+			}
 
-			Content = listView;
+			tableView.Root = root;
+			Content = tableView;
 		}
 	}
 }
