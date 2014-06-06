@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
+//using Xamarin.Geolocation;
 using SimpleRun.Models;
 
 namespace SimpleRun
@@ -41,12 +42,20 @@ namespace SimpleRun
 
 			map = new Map();
 
-			Position position = new Position(37.79762, -122.40181);
-			map.MoveToRegion(new MapSpan(position, 0.01, 0.01));
-			map.Pins.Add(new Pin {
-				Label = "Xamarin",
-				Position = position
-			});
+			var lastPosition = new Position(37.79762, -122.40181);
+
+			foreach (var pos in run.Positions) {
+				Position position = new Position(pos.Latitude, pos.Longitude);
+
+				map.Pins.Add(new Pin {
+					Label = string.Format("{0} - {1} per km", pos.PositionCaptureTime, pos.Speed),
+					Position = position
+				});
+
+				lastPosition = position;
+			}
+
+			map.MoveToRegion(new MapSpan(lastPosition, 0.01, 0.01));
 
 			Content = new StackLayout {
 				Orientation = StackOrientation.Vertical,
