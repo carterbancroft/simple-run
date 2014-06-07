@@ -22,6 +22,17 @@ namespace SimpleRun.Extensions
 				});
 			}
 		}
+
+		public static void Delete(this Run run) {
+			var positionIds = run.Positions.Select(p => p.ID).ToList();
+
+			lock (Database.Main) {
+				Database.Main.RunInTransaction(() => {
+					Database.Main.Execute("delete from RunPosition where ID in (?);", string.Join(",", positionIds));
+					Database.Main.Delete(run);
+				});
+			}
+		}
 	}
 }
 

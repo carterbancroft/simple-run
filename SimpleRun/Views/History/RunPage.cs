@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 //using Xamarin.Geolocation;
 using SimpleRun.Models;
+using SimpleRun.Extensions;
 
 namespace SimpleRun
 {
@@ -15,6 +17,12 @@ namespace SimpleRun
 		Label durationLabel;
 		Map map;
 
+		double minLat = 0;
+		double maxLat;
+
+		double minLon;
+		double maxLon;
+
 		public string Name { get; private set; }
 
 		public RunPage(Run _run)
@@ -22,6 +30,20 @@ namespace SimpleRun
 			run = _run;
 
 			Title = run.RunDate.ToShortDateString();
+			ToolbarItems.Add(new ToolbarItem(
+				string.Empty,
+				"bin.png",
+				async () =>
+				{
+					var page = new ContentPage();
+					var result = await page.DisplayAlert("Delete", "Delete this run?", "Accept", "Cancel");
+					if (result) {
+						run.Delete();
+						await Navigation.PopAsync();
+					}
+				}//,
+				//ToolbarItemOrder.Secondary
+			));
 
 			var font = Font.SystemFontOfSize(20);
 
@@ -42,20 +64,28 @@ namespace SimpleRun
 
 			map = new Map();
 
-			var lastPosition = new Position(37.79762, -122.40181);
+			var first = run.Positions.FirstOrDefault();
+			if (first != null) {
+				minLat = maxLat = first.Latitude;
+				minLon = maxLon = first.Longitude;
+			}
 
 			foreach (var pos in run.Positions) {
+				CheckForMinMaxLatLon(pos.Latitude, pos.Longitude);
 				Position position = new Position(pos.Latitude, pos.Longitude);
 
 				map.Pins.Add(new Pin {
 					Label = string.Format("{0} - {1} per km", pos.PositionCaptureTime, pos.Speed),
-					Position = position
+					Position = position,
+					Type = PinType.Place
 				});
-
-				lastPosition = position;
 			}
 
-			map.MoveToRegion(new MapSpan(lastPosition, 0.01, 0.01));
+			var center = new Position((minLat + maxLat) / 2, (minLon + maxLon) / 2);
+			var latSpan = (maxLat - minLat) * 1.3;
+			var lonSpan = (maxLon - minLon) * 1.3;
+
+			map.MoveToRegion(new MapSpan(center, latSpan, lonSpan));
 
 			Content = new StackLayout {
 				Orientation = StackOrientation.Vertical,
@@ -73,6 +103,15 @@ namespace SimpleRun
 					map,
 				}
 			};
+		}
+
+		void CheckForMinMaxLatLon(double lat, double lon) 
+		{
+			if (lat < minLat) minLat = lat;
+			else if (lat > maxLat) maxLat = lat;
+
+			if (lon < minLon) minLon = lon;
+			else if (lon > maxLon) maxLon = lon;
 		}
 	}
 }

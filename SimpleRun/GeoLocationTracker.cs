@@ -13,6 +13,8 @@ namespace SimpleRun
 		const int minPositionsNeededToUpdateStats = 3;
 		const double maxHorizontalAccuracy = 40.0f;
 
+		int positionCounter = 0;
+
 		Geolocator geolocator;
 
 		TimeSpan statsCalculationInterval;
@@ -100,9 +102,10 @@ namespace SimpleRun
 				}
 
 				routePositions.Add(bestPosition);
+				positionCounter++;
 
 				// Only insert every fifth point to minimize the amount of data being stored.
-				if (totalPositionHistory.Count == 0 || totalPositionHistory.Count % 5 == 0) {
+				if (totalPositionHistory.Count == 0 || positionCounter % 5 == 0) {
 					totalPositionHistory.Add(new RunPosition {
 						Speed = bestPosition.Speed,
 						Latitude = bestPosition.Latitude,

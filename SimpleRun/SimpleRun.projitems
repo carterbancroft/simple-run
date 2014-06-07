@@ -11,7 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoLocationTracker.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\TestPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\History\HistoryHomePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\History\HistoryNavigationPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\RootTabbedPage.cs" />
