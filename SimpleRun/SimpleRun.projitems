@@ -22,6 +22,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\History\RunPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RunPosition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\RunExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MeasurementType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />

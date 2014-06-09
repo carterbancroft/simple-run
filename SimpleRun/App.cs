@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using Xamarin.Forms;
 using SimpleRun.Views;
+using SimpleRun.Models;
 
 namespace SimpleRun
 {
@@ -11,6 +12,9 @@ namespace SimpleRun
 		public static TabbedPage GetMainPage()
 		{
 			UserIsRunning = false;
+
+			if (Settings.MeasurementType == MeasurementType.None)
+				InitSettings();
 
 			return new RootTabbedPage();
 		}
@@ -34,5 +38,9 @@ namespace SimpleRun
 		}
 
 		public static bool UserIsRunning { get; set; }
+
+		static void InitSettings() {
+			Settings.CreateKeyValue("MeasurementType", MeasurementType.Metric.ToString());
+		}
 	}
 }

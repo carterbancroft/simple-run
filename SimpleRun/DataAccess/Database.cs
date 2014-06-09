@@ -38,6 +38,7 @@ namespace SimpleRun.DataAccess
 		{
 			CreateTable<Run>();
 			CreateTable<RunPosition>();
+			CreateTable<Settings>();
 		}
 #endif
 	}

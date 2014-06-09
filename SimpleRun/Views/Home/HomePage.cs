@@ -68,11 +68,11 @@ namespace SimpleRun.Views.Home
 			distanceAndSpeedSubscription = null;
 			durationSubscription = null;
 
-			runButton.Clicked += (sender, e) => {
+			runButton.Clicked += async (sender, e) => {
 				if (!App.UserIsRunning)
-					StartRun();
+					await StartRunAsync();
 				else
-					StopRun();
+					await StopRunAsync();
 			};
 
 			layout.Children.Add(
@@ -164,7 +164,7 @@ namespace SimpleRun.Views.Home
 			durationLabel.Text = currentTimespan.ToString(@"hh\:mm\:ss");
 		}
 
-		async Task StartRun()
+		async Task StartRunAsync()
 		{
 			App.UserIsRunning = true;
 
@@ -186,7 +186,7 @@ namespace SimpleRun.Views.Home
 			durationSubscription = durationTimer.ObserveOn(SynchronizationContext.Current).Subscribe(DurationTimerTick);
 		}
 
-		async Task StopRun()
+		async Task StopRunAsync()
 		{
 			InitLabels();
 
