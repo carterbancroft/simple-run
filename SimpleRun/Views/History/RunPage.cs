@@ -17,7 +17,7 @@ namespace SimpleRun
 		Label durationLabel;
 		Map map;
 
-		double minLat = 0;
+		double minLat;
 		double maxLat;
 
 		double minLon;
@@ -28,11 +28,16 @@ namespace SimpleRun
 		public RunPage(Run _run)
 		{
 			run = _run;
-
 			Title = run.RunDate.ToShortDateString();
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
 			ToolbarItems.Add(new ToolbarItem(
 				string.Empty,
-				"bin.png",
+				"bin@2x.png",
 				async () =>
 				{
 					var page = new ContentPage();
