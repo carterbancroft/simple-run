@@ -52,12 +52,12 @@ namespace SimpleRun.Models
 		}
 
 		[Ignore]
-		public static MeasurementType MeasurementType {
+		public static DistanceUnit MeasurementType {
 			get {
 				var typeString = GetValueForKey("MeasurementType");
 
-				var theEnum = MeasurementType.None;
-				Enum.TryParse<MeasurementType>(typeString, out theEnum);
+				var theEnum = DistanceUnit.None;
+				Enum.TryParse<DistanceUnit>(typeString, out theEnum);
 				return theEnum;
 			}
 			set {

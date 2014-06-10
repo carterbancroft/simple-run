@@ -2,10 +2,10 @@
 
 namespace SimpleRun
 {
-	public enum MeasurementType
+	public enum DistanceUnit
 	{
 		None,
-		Customary,
-		Metric
+		Miles,
+		Kilometers
 	}
 }

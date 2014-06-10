@@ -14,7 +14,7 @@ namespace SimpleRun
 		{
 			UserIsRunning = false;
 
-			if (Settings.MeasurementType == MeasurementType.None)
+			if (Settings.MeasurementType == DistanceUnit.None)
 				InitSettings();
 
 			return new RootTabbedPage();
@@ -41,7 +41,7 @@ namespace SimpleRun
 		public static bool UserIsRunning { get; set; }
 
 		static void InitSettings() {
-			Settings.CreateOrUpdateKeyValue("MeasurementType", MeasurementType.Customary.ToString());
+			Settings.CreateOrUpdateKeyValue("MeasurementType", DistanceUnit.Miles.ToString());
 		}
 	}
 }

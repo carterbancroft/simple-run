@@ -20,12 +20,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\History\RunPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RunPosition.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\RunExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)MeasurementType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UnitUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\History\HistoryListPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Settings\SettingsListPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Custom\RightImageCell.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DistanceUnit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />

@@ -34,9 +34,9 @@ namespace SimpleRun.Views.Settings
 					if (kmImageCell.ImageIsVisible)
 						kmImageCell.ImageIsVisible = false;
 
-					SimpleRun.Models.Settings.MeasurementType = MeasurementType.Customary;
+					SimpleRun.Models.Settings.MeasurementType = DistanceUnit.Miles;
 				}),
-				ImageIsVisible = SimpleRun.Models.Settings.MeasurementType == MeasurementType.Customary
+				ImageIsVisible = SimpleRun.Models.Settings.MeasurementType == DistanceUnit.Miles
 			};
 
 			kmImageCell = new RightImageCell {
@@ -47,9 +47,9 @@ namespace SimpleRun.Views.Settings
 					if (milesImageCell.ImageIsVisible)
 						milesImageCell.ImageIsVisible = false;
 
-					SimpleRun.Models.Settings.MeasurementType = MeasurementType.Metric;
+					SimpleRun.Models.Settings.MeasurementType = DistanceUnit.Kilometers;
 				}),
-				ImageIsVisible = SimpleRun.Models.Settings.MeasurementType == MeasurementType.Metric
+				ImageIsVisible = SimpleRun.Models.Settings.MeasurementType == DistanceUnit.Kilometers
 			};
 
 			var root = new TableRoot();

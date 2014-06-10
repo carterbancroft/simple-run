@@ -8,7 +8,7 @@ namespace SimpleRun
 		public static string DistanceUnitString
 		{
 			get {
-				if (Settings.MeasurementType == MeasurementType.Metric)
+				if (Settings.MeasurementType == DistanceUnit.Kilometers)
 					return "km";
 
 				return "mi";
@@ -18,7 +18,7 @@ namespace SimpleRun
 		public static double ConversionValue
 		{
 			get {
-				if (Settings.MeasurementType == MeasurementType.Metric)
+				if (Settings.MeasurementType == DistanceUnit.Kilometers)
 					return 0.001;
 
 				return 0.000621371;
