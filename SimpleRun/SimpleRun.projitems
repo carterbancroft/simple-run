@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)UnitUtility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\History\HistoryListPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Settings\SettingsListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Custom\RightImageCell.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />
@@ -34,5 +35,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)DataAccess\" />
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
     <Folder Include="$(MSBuildThisFileDirectory)Extensions\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Views\Custom\" />
   </ItemGroup>
 </Project>

@@ -1,28 +1,66 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using Xamarin.Forms;
+using SimpleRun.Models;
+using SimpleRun.Views.Custom;
 
 namespace SimpleRun.Views.Settings
 {
-	public class SettingsHomePage : ContentPage
+	public class SettingsListPage : ContentPage
 	{
-		Label testLabel;
+		TableView tableView;
+		RightImageCell milesImageCell;
+		RightImageCell kmImageCell;
 
-		public SettingsHomePage()
+		public SettingsListPage()
 		{
 			Title = "Settings";
+		}
 
-			testLabel = new Label {
-				Text = "Settings... yeah...",
-				Font = Font.SystemFontOfSize(20),
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
+
+			tableView = new TableView {
+				Intent = TableIntent.Form,
 			};
 
-			Content = new StackLayout {
-				Orientation = StackOrientation.Vertical,
-				Padding = new Thickness(10),
-				Children = {
-					testLabel
-				}
+			milesImageCell = new RightImageCell {
+				Title = "Miles",
+				Source = "check",
+				Command = new Command(() => {
+					milesImageCell.ImageIsVisible = !milesImageCell.ImageIsVisible;
+					if (kmImageCell.ImageIsVisible)
+						kmImageCell.ImageIsVisible = false;
+
+					SimpleRun.Models.Settings.MeasurementType = MeasurementType.Customary;
+				}),
+				ImageIsVisible = SimpleRun.Models.Settings.MeasurementType == MeasurementType.Customary
 			};
+
+			kmImageCell = new RightImageCell {
+				Title = "Kilometers",
+				Source = "check",
+				Command = new Command(() => {
+					kmImageCell.ImageIsVisible = !kmImageCell.ImageIsVisible;
+					if (milesImageCell.ImageIsVisible)
+						milesImageCell.ImageIsVisible = false;
+
+					SimpleRun.Models.Settings.MeasurementType = MeasurementType.Metric;
+				}),
+				ImageIsVisible = SimpleRun.Models.Settings.MeasurementType == MeasurementType.Metric
+			};
+
+			var root = new TableRoot();
+			var section = new TableSection("Distance Unit");
+
+			section.Add(kmImageCell);
+			section.Add(milesImageCell);
+			root.Add(section);
+
+			tableView.Root = root;
+			Content = tableView;
 		}
 	}
 }

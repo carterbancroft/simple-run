@@ -138,6 +138,8 @@
     <BundleResource Include="Resources\settings%402x.png" />
     <BundleResource Include="Resources\bin%402x.png" />
     <BundleResource Include="Resources\bin.png" />
+    <BundleResource Include="Resources\check.png" />
+    <BundleResource Include="Resources\check%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
