@@ -38,7 +38,7 @@ namespace SimpleRun.Views.History
 				var newSection = new TableSection(key.ToShortDateString());
 				foreach (var run in groupedRunsByDate[key]) {
 					newSection.Add(new TextCell {
-						Text = string.Format("{0} km", run.DistanceInKm),
+						Text = run.FriendlyDistance,
 						Detail = run.FriendlyDuration,
 						Command = new Command(async () => await Navigation.PushAsync(new RunPage(run))),
 					});

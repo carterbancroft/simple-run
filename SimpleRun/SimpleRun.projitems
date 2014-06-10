@@ -24,6 +24,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\RunExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MeasurementType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Settings.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UnitUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />

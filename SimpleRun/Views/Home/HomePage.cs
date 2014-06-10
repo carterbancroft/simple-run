@@ -147,15 +147,8 @@ namespace SimpleRun.Views.Home
 
 		void DistanceAndSpeedTimerTick(long l)
 		{
-			distanceLabel.Text = Math.Round(tracker.CurrentDistance / 1000, 2).ToString("F") + " km";
-
-			var pace = tracker.CurrentPace;
-			if (pace == 0) return;
-
-			var minutesPerKm = Math.Round(1 / (pace * 0.001 * 60.0), 2);
-			var timeSpan = TimeSpan.FromMinutes(minutesPerKm);
-			paceLabel.Text = timeSpan.ToString(@"mm\:ss") + " per km";
-			//paceLabel.Text = pace.ToString();
+			distanceLabel.Text = tracker.CurrentDistanceString;
+			paceLabel.Text = tracker.CurrentPaceString;
 		}
 
 		void DurationTimerTick(long l)

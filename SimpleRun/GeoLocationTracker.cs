@@ -30,7 +30,20 @@ namespace SimpleRun
 		List<double> totalAveragePaceHistory;
 
 		public double CurrentDistance { get; set; }
+		public string CurrentDistanceString {
+			get {
+				return string.Format("{0} {1}", Math.Round(CurrentDistance * UnitUtility.ConversionValue, 2).ToString("F"), UnitUtility.DistanceUnitString);
+			}
+		}
 		public double CurrentPace { get; set; }
+		public string CurrentPaceString {
+			get {
+				if (CurrentPace == 0) return string.Empty;
+
+				double minutesPerUnit = Math.Round(1 / (CurrentPace * UnitUtility.ConversionValue * 60.0), 2);
+				return string.Format("{0} per {1}", TimeSpan.FromMinutes(minutesPerUnit).ToString(@"mm\:ss"), UnitUtility.DistanceUnitString);
+			}
+		}
 		public double AveragePace { 
 			get { 
 				if (totalAveragePaceHistory.Count == 0)

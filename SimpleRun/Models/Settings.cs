@@ -26,9 +26,22 @@ namespace SimpleRun.Models
 			return setting.Value;
 		}
 
-		public static void CreateKeyValue(string key, string value)
+		public static void CreateOrUpdateKeyValue(string key, string value)
 		{
-			var setting = new Settings {
+			Settings setting = null;
+			lock (Database.Main) {
+				setting = Database.Main.Table<Settings>().Where(s => s.Key == key).FirstOrDefault();
+			}
+
+			if (setting != null) {
+				setting.Value = value;
+				lock (Database.Main) {
+					Database.Main.Update(setting);
+					return;
+				}
+			}
+
+			setting = new Settings {
 				Key = key,
 				Value = value
 			};

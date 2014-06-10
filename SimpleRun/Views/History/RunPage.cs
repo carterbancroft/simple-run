@@ -53,12 +53,12 @@ namespace SimpleRun
 			var font = Font.SystemFontOfSize(20);
 
 			distanceLabel = new Label {
-				Text = string.Format("Distance: {0} km", run.DistanceInKm.ToString("F")),
+				Text = string.Format("Distance: {0}", run.FriendlyDistance),
 				Font = font,
 			};
 
 			averagePaceLabel = new Label {
-				Text = string.Format("Average Pace: {0} per km", run.FriendlyPaceInKm),
+				Text = string.Format("Average Pace: {0}", run.FriendlyPace),
 				Font = font,
 			};
 

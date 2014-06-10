@@ -32,21 +32,21 @@ namespace SimpleRun.Models
 		}
 
 		[Ignore]
-		public double DistanceInKm {
+		public string FriendlyDistance {
 			get {
-				return Math.Round(DistanceInMeters / 1000, 2);
+				return string.Format("{0} {1}", Math.Round(DistanceInMeters * UnitUtility.ConversionValue, 2).ToString("F"), UnitUtility.DistanceUnitString);
 			}
 		}
 
 		[Ignore]
-		public string FriendlyPaceInKm {
+		public string FriendlyPace {
 			get {
 				if (AveragePaceInMetersPerSecond == 0)
 					return "00:00";
 
-				var minutesPerKm = Math.Round(1 / (AveragePaceInMetersPerSecond * 0.001 * 60.0), 2);
-				var timeSpan = TimeSpan.FromMinutes(minutesPerKm);
-				return timeSpan.ToString(@"mm\:ss");
+				var minutesPerUnit = Math.Round(1 / (AveragePaceInMetersPerSecond * UnitUtility.ConversionValue * 60.0), 2);
+				var timeSpan = TimeSpan.FromMinutes(minutesPerUnit);
+				return string.Format("{0} per {1}", timeSpan.ToString(@"mm\:ss"), UnitUtility.DistanceUnitString);
 			}
 		}
 

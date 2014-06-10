@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using SimpleRun.Views;
 using SimpleRun.Models;
+using SimpleRun.DataAccess;
 
 namespace SimpleRun
 {
@@ -40,7 +41,7 @@ namespace SimpleRun
 		public static bool UserIsRunning { get; set; }
 
 		static void InitSettings() {
-			Settings.CreateKeyValue("MeasurementType", MeasurementType.Metric.ToString());
+			Settings.CreateOrUpdateKeyValue("MeasurementType", MeasurementType.Customary.ToString());
 		}
 	}
 }
