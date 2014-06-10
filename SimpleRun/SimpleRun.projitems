@@ -11,10 +11,8 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)App.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GeoLocationTracker.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\History\HistoryHomePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\History\HistoryNavigationPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\RootTabbedPage.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Views\Settings\SettingsHomePage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\Settings\SettingsNavigationPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Run.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataAccess\Database.cs" />
@@ -25,6 +23,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)MeasurementType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Settings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UnitUtility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\History\HistoryListPage.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\Settings\SettingsListPage.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Views\" />

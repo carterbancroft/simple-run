@@ -6,11 +6,11 @@ using SimpleRun.Models;
 
 namespace SimpleRun.Views.History
 {
-	public class HistoryHomePage : ContentPage
+	public class HistoryListPage : ContentPage
 	{
 		TableView tableView;
 
-		public HistoryHomePage()
+		public HistoryListPage()
 		{
 			Title = "History";
 		}
