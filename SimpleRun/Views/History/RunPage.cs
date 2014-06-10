@@ -2,7 +2,6 @@
 using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
-//using Xamarin.Geolocation;
 using SimpleRun.Models;
 using SimpleRun.Extensions;
 
@@ -29,11 +28,6 @@ namespace SimpleRun
 		{
 			run = _run;
 			Title = run.RunDate.ToShortDateString();
-		}
-
-		protected override void OnAppearing()
-		{
-			base.OnAppearing();
 
 			ToolbarItems.Add(new ToolbarItem(
 				string.Empty,
@@ -49,6 +43,11 @@ namespace SimpleRun
 				}//,
 				//ToolbarItemOrder.Secondary
 			));
+		}
+
+		protected override void OnAppearing()
+		{
+			base.OnAppearing();
 
 			var font = Font.SystemFontOfSize(20);
 
