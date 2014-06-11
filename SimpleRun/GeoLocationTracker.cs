@@ -32,13 +32,17 @@ namespace SimpleRun
 		public double CurrentDistance { get; set; }
 		public string CurrentDistanceString {
 			get {
+				if (CurrentDistance == 0)
+					return "0.00 " + UnitUtility.DistanceUnitString;
+
 				return string.Format("{0} {1}", Math.Round(CurrentDistance * UnitUtility.ConversionValue, 2).ToString("F"), UnitUtility.DistanceUnitString);
 			}
 		}
 		public double CurrentPace { get; set; }
 		public string CurrentPaceString {
 			get {
-				if (CurrentPace == 0) return string.Empty;
+				if (CurrentPace == 0) 
+					return "00:00 per " + UnitUtility.DistanceUnitString;
 
 				double minutesPerUnit = Math.Round(1 / (CurrentPace * UnitUtility.ConversionValue * 60.0), 2);
 				return string.Format("{0} per {1}", TimeSpan.FromMinutes(minutesPerUnit).ToString(@"mm\:ss"), UnitUtility.DistanceUnitString);

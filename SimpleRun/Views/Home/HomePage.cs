@@ -195,8 +195,8 @@ namespace SimpleRun.Views.Home
 
 		void InitLabels()
 		{
-			distanceLabel.Text = "0.00 km";
-			paceLabel.Text = "00:00 per km";
+			distanceLabel.Text = "0.00 " + UnitUtility.DistanceUnitString;
+			paceLabel.Text = "00:00 per " + UnitUtility.DistanceUnitString;
 			durationLabel.Text = "00:00:00";
 
 			distanceLabel.Opacity = 0;
