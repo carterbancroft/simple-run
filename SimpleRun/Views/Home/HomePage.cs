@@ -5,6 +5,10 @@ using System.Reactive.Linq;
 using Xamarin.Forms;
 using System.Threading.Tasks;
 
+#if __ANDROID__
+using Android.Content;
+#endif
+
 namespace SimpleRun.Views.Home
 {
 	public class HomePage : ContentPage
@@ -23,8 +27,16 @@ namespace SimpleRun.Views.Home
 
 		const int runButtonOffset = 125;
 
+#if __ANDROID__
+		Context context;
+
+		public HomePage(Context _context)
+		{
+			context = _context;
+#else
 		public HomePage()
 		{
+#endif
 			tracker = new GeoLocationTracker();
 			layout = new RelativeLayout();
 			BackgroundColor = App.StationaryTint;
@@ -172,7 +184,11 @@ namespace SimpleRun.Views.Home
 			paceLabel.Opacity = 1;
 			durationLabel.Opacity = 1;
 
+#if __ANDROID__
+			tracker.BeginTrackingLocation(context);
+#else
 			tracker.BeginTrackingLocation();
+#endif
 
 			startTime = DateTimeOffset.Now;
 			distanceAndSpeedSubscription = distanceTimer.ObserveOn(SynchronizationContext.Current).Subscribe(DistanceAndSpeedTimerTick);

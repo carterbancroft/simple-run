@@ -5,6 +5,10 @@ using Xamarin.Geolocation;
 using SimpleRun.Models;
 using SimpleRun.Extensions;
 
+#if __ANDROID__
+using Android.Content;
+#endif
+
 namespace SimpleRun
 {
 	public class GeoLocationTracker
@@ -69,12 +73,19 @@ namespace SimpleRun
 			statsCalculationInterval = new TimeSpan(0, 0, 1);
 			validLocationHistoryDeltaInterval = new TimeSpan(0, 0, 1);
 		}
-
+#if __ANDROID__
+		public void BeginTrackingLocation(Context context)
+#else
 		public void BeginTrackingLocation()
+#endif
 		{
 			Init();
 
+#if __ANDROID__
+			geolocator = new Geolocator(context) { DesiredAccuracy = 1 };
+#else
 			geolocator = new Geolocator() { DesiredAccuracy = 1 };
+#endif
 
 			startTime = DateTime.Now;
 

@@ -6,18 +6,29 @@ using SimpleRun.Views;
 using SimpleRun.Models;
 using SimpleRun.DataAccess;
 
+#if __ANDROID__
+using Android.Content;
+#endif
+
 namespace SimpleRun
 {
 	public class App
 	{
+#if __ANDROID__
+		public static TabbedPage GetMainPage(Context context)
+#else
 		public static TabbedPage GetMainPage()
+#endif
 		{
 			UserIsRunning = false;
 
 			if (Settings.MeasurementType == DistanceUnit.None)
 				InitSettings();
-
+#if __ANDROID__
+			return new RootTabbedPage(context);
+#else
 			return new RootTabbedPage();
+#endif
 		}
 
 		public static Color StationaryTint {

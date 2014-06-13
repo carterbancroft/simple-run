@@ -3,7 +3,7 @@ using System.IO;
 using SQLite.Net;
 using SimpleRun.Models;
 
-#if __Android__
+#if __ANDROID__
 using SQLite.Net.Platform.XamarinAndroid;
 #else
 using SQLite.Net.Platform.XamarinIOS;
@@ -27,11 +27,12 @@ namespace SimpleRun.DataAccess
 			Main = new Database(DBPath);
 		}
 			
-#if __Android__
+#if __ANDROID__
 		protected Database(string path) : base(new SQLitePlatformAndroid(), path)
 		{
 			CreateTable<Run>();
 			CreateTable<RunPosition>();
+			CreateTable<Settings>();
 		}
 #else
 		protected Database(string path) : base(new SQLitePlatformIOS(), path)

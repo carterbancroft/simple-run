@@ -35,7 +35,7 @@ namespace SimpleRun
 				async () =>
 				{
 					var page = new ContentPage();
-					var result = await page.DisplayAlert("Delete", "Delete this run?", "Accept", "Cancel");
+					var result = await page.DisplayAlert("Delete", "Are you sure?", "Accept", "Cancel");
 					if (result) {
 						run.Delete();
 						await Navigation.PopAsync();
@@ -76,7 +76,7 @@ namespace SimpleRun
 				minLon = maxLon = first.Longitude;
 			}
 
-			int pointReducer = (int)(0.05m * positions.Count);
+			int pointReducer = (int)(0.04m * positions.Count);
 
 			var count = 0;
 			foreach (var pos in positions) {

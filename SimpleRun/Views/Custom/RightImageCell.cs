@@ -9,8 +9,8 @@ namespace SimpleRun.Views.Custom
 		Label title;
 
 		public string Source { 
-			set { 
-				image.Source = value; 
+			set {
+				image.Source = FileImageSource.FromFile(value); 
 			}
 		}
 
