@@ -68,13 +68,23 @@ namespace SimpleRun
 
 			map = new Map();
 
-			var first = run.Positions.FirstOrDefault();
+			var positions = run.Positions;
+
+			var first = positions.FirstOrDefault();
 			if (first != null) {
 				minLat = maxLat = first.Latitude;
 				minLon = maxLon = first.Longitude;
 			}
 
-			foreach (var pos in run.Positions) {
+			int pointReducer = (int)(0.05m * positions.Count);
+
+			var count = 0;
+			foreach (var pos in positions) {
+				if (count % pointReducer != 0) {
+					count += 1;
+					continue;
+				}
+
 				CheckForMinMaxLatLon(pos.Latitude, pos.Longitude);
 				Position position = new Position(pos.Latitude, pos.Longitude);
 
@@ -83,6 +93,8 @@ namespace SimpleRun
 					Position = position,
 					Type = PinType.Place
 				});
+
+				count += 1;
 			}
 
 			var center = new Position((minLat + maxLat) / 2, (minLon + maxLon) / 2);
