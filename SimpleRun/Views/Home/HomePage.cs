@@ -25,7 +25,7 @@ namespace SimpleRun.Views.Home
 		IDisposable distanceAndSpeedSubscription;
 		IDisposable durationSubscription;
 
-		const int runButtonOffset = 125;
+		int runButtonOffset;
 
 #if __ANDROID__
 		Context context;
@@ -46,7 +46,6 @@ namespace SimpleRun.Views.Home
 				TextColor = Color.White,
 				Font = Font.SystemFontOfSize(50),
 				BackgroundColor = App.RunTint,
-				BorderRadius = 80,
 			};
 
 			// A Label whose upper-left is centered vertically and is simply used as a reference for layouts.
@@ -155,6 +154,14 @@ namespace SimpleRun.Views.Home
 
 			Icon = "pin@2x.png";
 			Title = "Run";
+		}
+
+		protected override void OnSizeAllocated(double width, double height)
+		{
+			base.OnSizeAllocated(width, height);
+
+			runButtonOffset = (int)(this.Height / 3);
+			runButton.BorderRadius = (int)(runButton.Width / 2);
 		}
 
 		void DistanceAndSpeedTimerTick(long l)
