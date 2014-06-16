@@ -214,7 +214,7 @@ namespace SimpleRun.Views.Home
 
 			await runButton.LayoutTo(new Rectangle(runButton.X, runButton.Y + runButtonOffset, runButton.Width, runButton.Height), 150, Easing.SpringOut);
 			App.UserIsRunning = false;
-			BackgroundColor = App.StationaryTint;
+			BackgroundColor = Device.OnPlatform(App.StationaryTint, Color.Transparent, Color.Transparent);
 			runButton.Text = "Run";
 		}
 
