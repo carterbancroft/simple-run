@@ -39,7 +39,9 @@ namespace SimpleRun.Views.Home
 #endif
 			tracker = new GeoLocationTracker();
 			layout = new RelativeLayout();
-			BackgroundColor = App.StationaryTint;
+
+			if (Device.OS == TargetPlatform.iOS)
+				BackgroundColor = App.StationaryTint;
 
 			runButton = new Button {
 				Text = "Run",

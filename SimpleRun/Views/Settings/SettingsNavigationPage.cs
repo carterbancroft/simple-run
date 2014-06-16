@@ -10,7 +10,9 @@ namespace SimpleRun.Views.Settings
 	{
 		public SettingsNavigationPage() : base(new SettingsListPage())
 		{
-			Tint = App.HeaderTint;
+			if (Device.OS == TargetPlatform.iOS)
+				Tint = App.HeaderTint;
+
 			Icon = "settings@2x.png";
 			Title = "Settings";
 		}

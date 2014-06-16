@@ -10,7 +10,9 @@ namespace SimpleRun.Views.History
 	{
 		public HistoryNavigationPage() : base(new HistoryListPage())
 		{
-			Tint = App.HeaderTint;
+			if (Device.OS == TargetPlatform.iOS)
+				Tint = App.HeaderTint;
+
 			Icon = "book@2x.png";
 			Title = "History";
 		}

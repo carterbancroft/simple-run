@@ -14,6 +14,8 @@ namespace SimpleRun
 		Label distanceLabel;
 		Label averagePaceLabel;
 		Label durationLabel;
+
+		// Right now I'm not including the map view in the Android version.
 		Map map;
 
 		double minLat;
@@ -31,7 +33,7 @@ namespace SimpleRun
 
 			ToolbarItems.Add(new ToolbarItem(
 				string.Empty,
-				"bin@2x.png",
+				"bin2x.png",
 				async () =>
 				{
 					var page = new ContentPage();
@@ -66,6 +68,23 @@ namespace SimpleRun
 				Font = font,
 			};
 
+			var layout = new StackLayout {
+				Orientation = StackOrientation.Vertical,
+				VerticalOptions = LayoutOptions.FillAndExpand,
+				Children = {
+					new StackLayout {
+						VerticalOptions = LayoutOptions.Start,
+						Padding = new Thickness(10),
+						Children = {
+							durationLabel,
+							distanceLabel,
+							averagePaceLabel,
+						}
+					},
+				}
+			};
+
+#if __IOS__
 			map = new Map();
 
 			var positions = run.Positions;
@@ -103,22 +122,9 @@ namespace SimpleRun
 
 			map.MoveToRegion(new MapSpan(center, latSpan, lonSpan));
 
-			Content = new StackLayout {
-				Orientation = StackOrientation.Vertical,
-				VerticalOptions = LayoutOptions.FillAndExpand,
-				Children = {
-					new StackLayout {
-						VerticalOptions = LayoutOptions.Start,
-						Padding = new Thickness(10),
-						Children = {
-							durationLabel,
-							distanceLabel,
-							averagePaceLabel,
-						}
-					},
-					map,
-				}
-			};
+			layout.Children.Add(map);
+#endif
+			Content = layout;
 		}
 
 		void CheckForMinMaxLatLon(double lat, double lon) 
