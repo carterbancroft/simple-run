@@ -75,6 +75,6 @@ Global
 		{0CFE647D-692E-4139-B81E-90BF02866B3C} = {5EA6964C-E91D-4E83-928B-EA9AD2531B4C}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Targets\iOS\SimpleRun.iOS.csproj
+		StartupItem = Targets\Android\SimpleRun.Android.csproj
 	EndGlobalSection
 EndGlobal

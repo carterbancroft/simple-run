@@ -12,7 +12,7 @@ using Xamarin.Forms.Platform.Android;
 
 namespace SimpleRun.Android
 {
-	[Activity(Label = "SimpleRun.Android.Android", MainLauncher = true)]
+	[Activity(Label = "Simple Run", MainLauncher = true)]
 	public class MainActivity : AndroidActivity
 	{
 		protected override void OnCreate(Bundle bundle)
@@ -20,7 +20,7 @@ namespace SimpleRun.Android
 			base.OnCreate(bundle);
 
 			Xamarin.Forms.Forms.Init(this, bundle);
-			Xamarin.FormsMaps.Init(this, bundle);
+			//Xamarin.FormsMaps.Init(this, bundle);
 
 			SetPage(App.GetMainPage(this.ApplicationContext));
 		}

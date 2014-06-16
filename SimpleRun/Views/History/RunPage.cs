@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Linq;
 using Xamarin.Forms;
+#if __IOS__
 using Xamarin.Forms.Maps;
+#endif
 using SimpleRun.Models;
 using SimpleRun.Extensions;
 
@@ -15,8 +17,10 @@ namespace SimpleRun
 		Label averagePaceLabel;
 		Label durationLabel;
 
-		// Right now I'm not including the map view in the Android version.
+// Right now I'm not including the map view in the Android version.
+#if __IOS__
 		Map map;
+#endif
 
 		double minLat;
 		double maxLat;
@@ -33,7 +37,7 @@ namespace SimpleRun
 
 			ToolbarItems.Add(new ToolbarItem(
 				string.Empty,
-				"bin2x.png",
+				"bin.png",
 				async () =>
 				{
 					var page = new ContentPage();
